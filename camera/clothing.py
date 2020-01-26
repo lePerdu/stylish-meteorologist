@@ -30,6 +30,7 @@ PANTS_LABELS = [
 
 
 class DetectionError(Exception):
+    pass
 
 
 def has_object_type(labels, clothing):
