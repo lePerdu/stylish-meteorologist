@@ -4,12 +4,19 @@ import dotenv
 
 import capture
 import clothing
+import weather
 
 # Load AWS credentials from the .env file
 dotenv.load_dotenv()
 
 
 def main():
+    cur_weather = weater.get_weather()
+
+    print(f"Temperature: {cur_weather.cur_temp}")
+    if cur_weather.is_raining:
+        print("Raining")
+
     while True:
         input()
         image = capture.capture_image()
