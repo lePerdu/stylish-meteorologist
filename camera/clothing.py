@@ -5,7 +5,7 @@ import boto3
 rekognition = boto3.client('rekognition')
 
 # TODO Allow this to be set in .env?
-MIN_CONFIDENCE = 70
+MIN_CONFIDENCE = 80
 
 PERSON_LABELS = [
     'Person',
@@ -19,6 +19,8 @@ COAT_LABELS = [
     'Jacket',
     'Overcoat',
     'Sweater',
+    'Sweatshirt',
+    'Long Sleeve',
 ]
 
 # TODO Rekognition doesn't really return these labels, so we don't check for
