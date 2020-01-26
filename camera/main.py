@@ -13,7 +13,7 @@ dotenv.load_dotenv()
 def main():
     cur_weather = weather.get_weather()
 
-    print(f"Temperature: {cur_weather.cur_temp}")
+    print(f"Temperature: {cur_weather.temp}")
     if cur_weather.is_raining:
         print("Raining")
 

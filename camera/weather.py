@@ -13,7 +13,7 @@ OPENWEATHERMAP_API_KEY = os.environ['OPENWEATHERMAP_API_KEY']
 
 class Weather:
     def __init__(self, temp, min_temp, max_temp, is_raining):
-        self.cur_temp = temp
+        self.temp = temp
         self.min_temp = min_temp
         self.max_temp = max_temp
         self.is_raining = is_raining
