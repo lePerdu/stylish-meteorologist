@@ -7,8 +7,8 @@ import os
 
 import requests
 
-CITY_ID = os.environ['OPEN_WEATHER_CITY_ID']
 TEMPERATURE_UNITS = os.environ['TEMPERATURE_UNITS']
+OPENWEATHERMAP_API_KEY = os.environ['OPENWEATHERMAP_API_KEY']
 
 
 class Weather:
@@ -20,17 +20,26 @@ class Weather:
 
 
 def get_weather():
+    zip_code = get_zip_code()
     resp = requests.get(
-        'https://openweathermap.org/data/2.5/weather',
+        'https://api.openweathermap.org/data/2.5/weather',
         params={
-            'id': CITY_ID,
+            'zip': zip_code,
             'units': TEMPERATURE_UNITS,
+            'appid': OPENWEATHERMAP_API_KEY,
         })
 
     data = resp.json()
 
     temp = data['main']['feels_like']
     min_temp, max_temp = data['main']['temp_min'], data['main']['temp_max']
-    raining = data['weather']['main'] == "Rain"
+    # Multiple weather conditions are sent
+    raining = any(w['main'] == "Rain" for w in data['weather'])
 
     return Weather(temp, min_temp, max_temp, raining)
+
+
+def get_zip_code():
+    """Use ip-api.com to geolocate current IP address."""
+    data = requests.get('http://ip-api.com/json').json()
+    return data['zip']
