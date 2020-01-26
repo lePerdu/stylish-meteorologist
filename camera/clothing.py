@@ -42,6 +42,9 @@ def wearing_warm_clothes(image_bytes):
         Image={'Bytes': image_bytes},
         MinConfidence=MIN_CONFIDENCE)
 
+    for l in labels['Labels']:
+        print(f"{l['Confidence']}\t{l['Name']}")
+
     if has_object_type(labels, PERSON_LABELS):
         has_coat = has_object_type(labels, COAT_LABELS)
         # has_pants = has_object_type(labels, PANTS_LABELS)

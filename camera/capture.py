@@ -3,12 +3,11 @@ import time
 
 import picamera
 
+camera = picamera.PiCamera()
+
 
 def capture_image():
-    camera = picamera.PiCamera()
-    # Wait 2 seconds for the camera to adjsut to the conditions
-    time.sleep(2)
-
-    camera.capture(buf)
+    buf = io.BytesIO()
+    camera.capture(buf, format='jpeg')
     # TODO Is this okay? Will not closing the buffer have consequences?
-    return buf.getbuffer()
+    return bytes(buf.getbuffer())
