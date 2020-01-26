@@ -32,7 +32,7 @@ PANTS_LABELS = [
 ]
 
 SHORTS_LABELS = [
-    'Short',
+    'Shorts',
     'Skirt',
 ]
 
@@ -55,11 +55,11 @@ def wearing_coat(labels):
 
 def wearing_pants(labels):
     # Pants detection is a bit finicky, so also check for shorts and skirts
-    has_long = has_object_type(labels, PANTS_LABELS)
-    has_short = has_object_type(labels, SHORTS_LABELS)
+    has_long_paths = has_object_type(labels, PANTS_LABELS)
+    has_shorts = has_object_type(labels, SHORTS_LABELS)
     # Bias towards having long pants if nothing is detected
     # (the coat is kind of more important anyway)
-    return has_long or not has_short
+    return has_long_paths or not has_shorts
 
 
 def wearing_warm_clothes(image_bytes):
