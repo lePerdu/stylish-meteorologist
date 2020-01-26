@@ -73,7 +73,20 @@ def wearing_warm_clothes(image_bytes):
         Image={'Bytes': image_bytes},
         MinConfidence=MIN_CONFIDENCE)
 
+    print()
+
+    for l in labels['Labels']:
+        print(f"{l['Confidence']:0.0f}\t{l['Name']}")
+
+    print()
+
     if has_person(labels):
-        return weaing_coat(labels), wearing_pants(labels)
+        coat, pants = wearing_coat(labels), wearing_pants(labels)
+        if coat:
+            print("Wearing coat")
+        if pants:
+            print("Wearing long pants")
+        return coat, pants
     else:
+        print("No person detected")
         return None
